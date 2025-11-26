@@ -25,6 +25,9 @@ public class ModEffects {
     public static final RegistryObject<Effect> DEATH_DELAY =
             EFFECTS.register("death_delay", () -> new DeathDelayEffect());
 
+    public static final RegistryObject<Effect> TRANSMUTATION =
+            EFFECTS.register("transmutation", () -> new TransmutationEffect());
+
     /**
      * Call this method from your main mod constructor to register the effects.
      */

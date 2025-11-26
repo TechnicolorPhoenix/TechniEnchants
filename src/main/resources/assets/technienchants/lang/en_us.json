@@ -4,5 +4,10 @@
   "effect.technienchants.curse_of_rust": "Rusting",
   "effect.technienchants.stoneskin": "Stoneskin",
   "effect.technienchants.stasis": "Stasis",
-  "effect.technienchants.death_delay": "Death Delay"
+  "effect.technienchants.death_delay": "Death Delay",
+  "effect.technienchants.transmutation": "Transmutation",
+
+  "item.minecraft.potion.effect.stoneskin_potion": "Stoneskin Potion",
+  "item.minecraft.potion.effect.long_stoneskin_potion": "Long Stoneskin Potion",
+  "item.minecraft.potion.effect.strong_stoneskin_potion": "Strong Stoneskin Potion"
 }

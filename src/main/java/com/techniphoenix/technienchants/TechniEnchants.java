@@ -1,9 +1,21 @@
 package com.techniphoenix.technienchants;
 
+import com.techniphoenix.technienchants.effect.ModEffects;
+import com.techniphoenix.technienchants.effect.recipe.GildedBlackstoneBrewingRecipe;
+import com.techniphoenix.technienchants.enchantment.ModEnchantments;
 import com.techniphoenix.technienchants.event.ModEvents;
+import com.techniphoenix.technienchants.item.ModPotions;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.potion.PotionBrewing;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.potion.Potions;
+import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -32,8 +44,9 @@ public class TechniEnchants
         // Register the setup method for modloading
         IEventBus eventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        com.techniphoenix.technienchants.effect.ModEffects.register(eventBus);
-        com.techniphoenix.technienchants.enchantment.ModEnchantments.register(eventBus);
+        ModEffects.register(eventBus);
+        ModEnchantments.register(eventBus);
+        ModPotions.register(eventBus);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -52,7 +65,32 @@ public class TechniEnchants
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        // some preinit code
+
+        ItemStack stoneSkinPotionStack = PotionUtils.setPotion(
+                new ItemStack(Items.POTION), ModPotions.STONESKIN.get()
+        );
+        ItemStack awkwardPotion = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
+        event.enqueueWork(() -> {
+
+            BrewingRecipeRegistry.addRecipe(new GildedBlackstoneBrewingRecipe());
+
+            BrewingRecipeRegistry.addRecipe(
+                    Ingredient.of(stoneSkinPotionStack.getItem()),
+                    Ingredient.of(Items.REDSTONE),
+                    PotionUtils.setPotion(
+                            new ItemStack(Items.POTION), ModPotions.LONG_STONESKIN_POTION.get()
+                    )
+            );
+
+            BrewingRecipeRegistry.addRecipe(
+                    Ingredient.of(stoneSkinPotionStack.getItem()),
+                    Ingredient.of(Items.GLOWSTONE_DUST),
+                    PotionUtils.setPotion(
+                            new ItemStack(Items.POTION), ModPotions.STRONG_STONESKIN_POTION.get()
+                    )
+            );
+
+        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -62,7 +100,7 @@ public class TechniEnchants
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("technienchants", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+        InterModComms.sendTo(MOD_ID, "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
