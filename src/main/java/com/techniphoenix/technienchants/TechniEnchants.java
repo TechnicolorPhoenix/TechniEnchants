@@ -2,18 +2,17 @@ package com.techniphoenix.technienchants;
 
 import com.techniphoenix.technienchants.effect.ModEffects;
 import com.techniphoenix.technienchants.effect.recipe.GildedBlackstoneBrewingRecipe;
+import com.techniphoenix.technienchants.effect.recipe.TransmutationBrewingRecipe;
 import com.techniphoenix.technienchants.enchantment.ModEnchantments;
 import com.techniphoenix.technienchants.event.ModEvents;
+import com.techniphoenix.technienchants.loot_modifier.ModLootModifiers;
 import com.techniphoenix.technienchants.item.ModPotions;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.potion.PotionBrewing;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.potion.Potions;
-import net.minecraft.util.IItemProvider;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
@@ -30,15 +29,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.stream.Collectors;
-
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("technienchants")
+@Mod(TechniEnchants.MOD_ID)
 public class TechniEnchants
 {
     public static final String MOD_ID = "technienchants";
     // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final Logger LOGGER = LogManager.getLogger();
 
     public TechniEnchants() {
         // Register the setup method for modloading
@@ -47,6 +44,7 @@ public class TechniEnchants
         ModEffects.register(eventBus);
         ModEnchantments.register(eventBus);
         ModPotions.register(eventBus);
+        ModLootModifiers.register(eventBus);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -69,11 +67,13 @@ public class TechniEnchants
         ItemStack stoneSkinPotionStack = PotionUtils.setPotion(
                 new ItemStack(Items.POTION), ModPotions.STONESKIN.get()
         );
-        ItemStack awkwardPotion = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.AWKWARD);
+        ItemStack transmutationPotionStack = PotionUtils.setPotion(
+                new ItemStack(Items.POTION), ModPotions.TRANSMUTATION.get()
+        );
+
         event.enqueueWork(() -> {
 
             BrewingRecipeRegistry.addRecipe(new GildedBlackstoneBrewingRecipe());
-
             BrewingRecipeRegistry.addRecipe(
                     Ingredient.of(stoneSkinPotionStack.getItem()),
                     Ingredient.of(Items.REDSTONE),
@@ -81,12 +81,27 @@ public class TechniEnchants
                             new ItemStack(Items.POTION), ModPotions.LONG_STONESKIN_POTION.get()
                     )
             );
-
             BrewingRecipeRegistry.addRecipe(
                     Ingredient.of(stoneSkinPotionStack.getItem()),
                     Ingredient.of(Items.GLOWSTONE_DUST),
                     PotionUtils.setPotion(
                             new ItemStack(Items.POTION), ModPotions.STRONG_STONESKIN_POTION.get()
+                    )
+            );
+
+            BrewingRecipeRegistry.addRecipe(new TransmutationBrewingRecipe());
+            BrewingRecipeRegistry.addRecipe(
+                    Ingredient.of(transmutationPotionStack.getItem()),
+                    Ingredient.of(Items.REDSTONE),
+                    PotionUtils.setPotion(
+                            new ItemStack(Items.POTION), ModPotions.LONG_TRANSMUTATION_POTION.get()
+                    )
+            );
+            BrewingRecipeRegistry.addRecipe(
+                    Ingredient.of(transmutationPotionStack.getItem()),
+                    Ingredient.of(Items.GLOWSTONE_DUST),
+                    PotionUtils.setPotion(
+                            new ItemStack(Items.POTION), ModPotions.STRONG_TRANSMUTATION_POTION.get()
                     )
             );
 

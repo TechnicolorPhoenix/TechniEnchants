@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "entries": [
+    "technienchants:transmutation_stone",
+    "technienchants:transmutation_coal_ore",
+    "technienchants:transmutation_iron_ore",
+    "technienchants:transmutation_gold_ore",
+    "technienchants:transmutation_lapis_ore",
+    "technienchants:transmutation_quartz_ore",
+    "technienchants:transmutation_blackstone",
+    "technienchants:transmutation_sand",
+    "technienchants:transmutation_obsidian"
+  ]
+}
