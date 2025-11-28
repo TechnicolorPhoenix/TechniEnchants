@@ -21,7 +21,7 @@ public class TransmutationBrewingRecipe implements IBrewingRecipe {
         this.inputStack = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.LUCK);
         this.inputIngredient = Ingredient.of(this.inputStack);
 
-        this.ingredient = Ingredient.of(Items.GOLDEN_PICKAXE);
+        this.ingredient = Ingredient.of(Items.BREWING_STAND);
 
         this.outputStack = PotionUtils.setPotion(new ItemStack(Items.POTION), ModPotions.TRANSMUTATION.get());
     }

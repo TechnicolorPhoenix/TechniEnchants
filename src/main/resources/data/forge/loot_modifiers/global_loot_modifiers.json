@@ -6,7 +6,8 @@
     "technienchants:transmutation_iron_ore",
     "technienchants:transmutation_gold_ore",
     "technienchants:transmutation_lapis_ore",
-    "technienchants:transmutation_quartz_ore",
+    "technienchants:transmutation_nether_quartz_ore",
+    "technienchants:transmutation_dirt",
     "technienchants:transmutation_blackstone",
     "technienchants:transmutation_sand",
     "technienchants:transmutation_obsidian"

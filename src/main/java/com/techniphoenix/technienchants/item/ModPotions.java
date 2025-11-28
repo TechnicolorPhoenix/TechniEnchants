@@ -30,7 +30,7 @@ public class ModPotions {
     public static final RegistryObject<Potion> LONG_TRANSMUTATION_POTION = POTIONS.register("long_transmutation_potion",
             () -> new Potion("long_transmutation_potion", new EffectInstance(ModEffects.TRANSMUTATION.get(), 9600))); // 9600 ticks = 8 minutes
     public static final RegistryObject<Potion> STRONG_TRANSMUTATION_POTION = POTIONS.register("strong_transmutation_potion",
-            () -> new Potion("strong_transmutation_potion", new EffectInstance(ModEffects.TRANSMUTATION.get(), 1800, 1))); // 1800 ticks = 1.5 min, level 5 (amplifier +25% damage reduction)
+            () -> new Potion("strong_transmutation_potion", new EffectInstance(ModEffects.TRANSMUTATION.get(), 1800, 1))); // 1800 ticks = 1.5 min, level 2 (double chances)
 
     public static void register(IEventBus eventBus) {
         POTIONS.register(eventBus);

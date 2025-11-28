@@ -44,6 +44,11 @@ public class TransmutationModifier extends LootModifier {
         }
 
         int transmutationLevel = harvester.getEffect(ModEffects.TRANSMUTATION.get()).getAmplifier() + 1;
+        float roll = RANDOM.nextFloat()/transmutationLevel;
+
+        if (roll > 0.25f) {
+            return generatedLoot;
+        }
 
         BlockState brokenState = context.getParamOrNull(LootParameters.BLOCK_STATE);
 
@@ -55,10 +60,11 @@ public class TransmutationModifier extends LootModifier {
 
         ResourceLocation blockId = brokenState.getBlock().getRegistryName();
 
-        if (blockId.equals(new ResourceLocation("minecraft", "stone"))) {
-            chance = 0.05f;
-            minCount = 1; maxCount = 3;
-            transmutedStack = new ItemStack(Items.COAL);
+        if (blockId.equals(new ResourceLocation("minecraft", "nether_quartz_ore"))) {
+            chance = 0.25f;
+            minCount = 1;
+            maxCount = 2;
+            transmutedStack = new ItemStack(Items.GOLD_INGOT);
         } else if (blockId.equals(new ResourceLocation("minecraft", "coal_ore"))) {
             chance = 0.10f;
             minCount = 1; maxCount = 3;
@@ -71,14 +77,26 @@ public class TransmutationModifier extends LootModifier {
             chance = 0.10f;
             minCount = 3; maxCount = 5;
             transmutedStack = new ItemStack(Items.EMERALD);
-        } else if (blockId.equals(new ResourceLocation("minecraft", "quartz_ore"))) {
-            chance = 0.25f;
-            minCount = 1; maxCount = 2;
-            transmutedStack = new ItemStack(Items.GOLD_INGOT);
+        } else if (blockId.equals(new ResourceLocation("minecraft", "obsidian"))) {
+            chance = 0.10f;
+            minCount = 1; maxCount = 1;
+            transmutedStack = new ItemStack(Items.CRYING_OBSIDIAN);
+        } else if (blockId.equals(new ResourceLocation("minecraft", "stone"))) {
+            chance = 0.05f;
+            minCount = 1; maxCount = 3;
+            transmutedStack = new ItemStack(Items.COAL);
+        } else if (blockId.equals(new ResourceLocation("minecraft", "coal_ore"))) {
+            chance = 0.05f;
+            minCount = 1; maxCount = 3;
+            transmutedStack = new ItemStack(Items.GLOWSTONE_DUST);
+        } else if (blockId.equals(new ResourceLocation("minecraft", "dirt"))) {
+            chance = 0.01f;
+            minCount = 1; maxCount = 3;
+            transmutedStack = new ItemStack(Items.IRON_NUGGET);
         } else if (blockId.equals(new ResourceLocation("minecraft", "sand"))) {
             chance = 0.01f;
             minCount = 1; maxCount = 3;
-            transmutedStack = new ItemStack(Items.GLOWSTONE_DUST);
+            transmutedStack = new ItemStack(Items.GOLD_NUGGET);
         } else if (blockId.equals(new ResourceLocation("minecraft", "lapis_ore"))) {
             chance = 0.01f;
             minCount = 1; maxCount = 1;
@@ -87,15 +105,9 @@ public class TransmutationModifier extends LootModifier {
             chance = 0.01f;
             minCount = 1; maxCount = 1;
             transmutedStack = new ItemStack(Items.GILDED_BLACKSTONE);
-        } else if (blockId.equals(new ResourceLocation("minecraft", "obsidian"))) {
-            chance = 0.10f;
-            minCount = 1; maxCount = 1;
-            transmutedStack = new ItemStack(Items.CRYING_OBSIDIAN);
         }
 
-        chance *= transmutationLevel;
-
-        if (!transmutedStack.isEmpty() && RANDOM.nextFloat() < chance) {
+        if (!transmutedStack.isEmpty() && roll < chance) {
             int dropCount = minCount + RANDOM.nextInt(maxCount - minCount + 1);
             transmutedStack.setCount(dropCount);
 

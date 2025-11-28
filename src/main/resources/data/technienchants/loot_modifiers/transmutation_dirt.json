@@ -3,7 +3,7 @@
   "conditions": [
     {
       "condition": "minecraft:block_state_property",
-      "block": "minecraft:quartz_ore"
+      "block": "minecraft:dirt"
     }
   ]
 }
