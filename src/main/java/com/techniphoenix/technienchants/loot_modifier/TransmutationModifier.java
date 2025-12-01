@@ -67,11 +67,11 @@ public class TransmutationModifier extends LootModifier {
             transmutedStack = new ItemStack(Items.GOLD_INGOT);
         } else if (blockId.equals(new ResourceLocation("minecraft", "coal_ore"))) {
             chance = 0.10f;
-            minCount = 1; maxCount = 3;
+            minCount = 6; maxCount = 13;
             transmutedStack = new ItemStack(Items.IRON_NUGGET);
         } else if (blockId.equals(new ResourceLocation("minecraft", "iron_ore"))) {
             chance = 0.10f;
-            minCount = 12; maxCount = 36;
+            minCount = 6; maxCount = 16;
             transmutedStack = new ItemStack(Items.GOLD_NUGGET);
         } else if (blockId.equals(new ResourceLocation("minecraft", "gold_ore"))) {
             chance = 0.10f;
