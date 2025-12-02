@@ -1,8 +1,7 @@
 package com.techniphoenix.technienchants;
 
 import com.techniphoenix.technienchants.effect.ModEffects;
-import com.techniphoenix.technienchants.effect.recipe.GildedBlackstoneBrewingRecipe;
-import com.techniphoenix.technienchants.effect.recipe.TransmutationBrewingRecipe;
+import com.techniphoenix.technienchants.effect.recipe.ModBrewingRecipes;
 import com.techniphoenix.technienchants.enchantment.ModEnchantments;
 import com.techniphoenix.technienchants.event.ModEvents;
 import com.techniphoenix.technienchants.loot_modifier.ModLootModifiers;
@@ -10,9 +9,7 @@ import com.techniphoenix.technienchants.item.ModPotions;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.potion.Potions;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.RegistryEvent;
@@ -64,47 +61,15 @@ public class TechniEnchants
     private void setup(final FMLCommonSetupEvent event)
     {
 
-        ItemStack stoneSkinPotionStack = PotionUtils.setPotion(
-                new ItemStack(Items.POTION), ModPotions.STONESKIN.get()
-        );
-        ItemStack transmutationPotionStack = PotionUtils.setPotion(
-                new ItemStack(Items.POTION), ModPotions.TRANSMUTATION.get()
-        );
-
         event.enqueueWork(() -> {
 
-            BrewingRecipeRegistry.addRecipe(new GildedBlackstoneBrewingRecipe());
-            BrewingRecipeRegistry.addRecipe(
-                    Ingredient.of(stoneSkinPotionStack.getItem()),
-                    Ingredient.of(Items.REDSTONE),
-                    PotionUtils.setPotion(
-                            new ItemStack(Items.POTION), ModPotions.LONG_STONESKIN_POTION.get()
-                    )
-            );
-            BrewingRecipeRegistry.addRecipe(
-                    Ingredient.of(stoneSkinPotionStack.getItem()),
-                    Ingredient.of(Items.GLOWSTONE_DUST),
-                    PotionUtils.setPotion(
-                            new ItemStack(Items.POTION), ModPotions.STRONG_STONESKIN_POTION.get()
-                    )
-            );
+            BrewingRecipeRegistry.addRecipe(ModBrewingRecipes.STONESKIN_RECIPE);
+            BrewingRecipeRegistry.addRecipe(ModBrewingRecipes.STONESKIN_STRONG_RECIPE);
+            BrewingRecipeRegistry.addRecipe(ModBrewingRecipes.STONESKIN_LONG_RECIPE);
 
-            BrewingRecipeRegistry.addRecipe(new TransmutationBrewingRecipe());
-            BrewingRecipeRegistry.addRecipe(
-                    Ingredient.of(transmutationPotionStack.getItem()),
-                    Ingredient.of(Items.REDSTONE),
-                    PotionUtils.setPotion(
-                            new ItemStack(Items.POTION), ModPotions.LONG_TRANSMUTATION_POTION.get()
-                    )
-            );
-            BrewingRecipeRegistry.addRecipe(
-                    Ingredient.of(transmutationPotionStack.getItem()),
-                    Ingredient.of(Items.GLOWSTONE_DUST),
-                    PotionUtils.setPotion(
-                            new ItemStack(Items.POTION), ModPotions.STRONG_TRANSMUTATION_POTION.get()
-                    )
-            );
-
+            BrewingRecipeRegistry.addRecipe(ModBrewingRecipes.TRANSMUTATION_RECIPE);
+            BrewingRecipeRegistry.addRecipe(ModBrewingRecipes.TRANSMUTATION_STRONG_RECIPE);
+            BrewingRecipeRegistry.addRecipe(ModBrewingRecipes.TRANSMUTATION_LONG_RECIPE);
         });
     }
 

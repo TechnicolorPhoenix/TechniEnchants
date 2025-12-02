@@ -9,5 +9,9 @@
 
   "item.minecraft.potion.effect.stoneskin_potion": "Stoneskin Potion",
   "item.minecraft.potion.effect.long_stoneskin_potion": "Long Stoneskin Potion",
-  "item.minecraft.potion.effect.strong_stoneskin_potion": "Strong Stoneskin Potion"
+  "item.minecraft.potion.effect.strong_stoneskin_potion": "Strong Stoneskin Potion",
+
+  "item.minecraft.potion.effect.transmutation_potion": "Transmutation Potion",
+  "item.minecraft.potion.effect.long_transmutation_potion": "Long Transmutation Potion",
+  "item.minecraft.potion.effect.strong_transmutation_potion": "Strong Transmutation Potion"
 }
